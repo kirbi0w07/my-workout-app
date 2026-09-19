@@ -1,112 +1,198 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import ExerciseCard from '@/components/Explore/ExerciseCard';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+import ItemList from '@/components/ui/ItemList';
+import HomeFastTrain from '@/components/ui/Slider';
+import { Exercise, searchExercises } from '@bryllim/workout-guide';
+import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { FlatList, StyleSheet, TextInput, View } from 'react-native';
 
 export default function TabTwoScreen() {
+  const [search, onChangeSearch] = useState('');
+  const [isSearching, setisSeaching] = useState(false)
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+
+  const popularTrains = [
+    {
+      id: '1',
+      name: 'Push Day',
+      exercises: '12',
+      duration: '25 min',
+      image: require('../../assets/images/workout_plains/mancuernas.webp')
+    },
+    {
+      id: '2',
+      name: 'Leg Day',
+      exercises: '14',
+      duration: '30 min',
+      image: require('../../assets/images/workout_plains/mancuernas.webp')
+    },
+  ];
+
+  const muscles = [
+    { id: '1', nameEn: 'Chest', nameEs: 'Pecho', icon: 'airplane' as const },
+    { id: '2', nameEn: 'Back', nameEs: 'Espalda', icon: 'airplane' as const },
+    { id: '3', nameEn: 'Legs', nameEs: 'Piernas', icon: 'airplane' as const },
+    { id: '4', nameEn: 'Arms', nameEs: 'Brazos', icon: 'airplane' as const },
+    { id: '5', nameEn: 'Shoulders', nameEs: 'Hombros', icon: 'airplane' as const },
+    { id: '6', nameEn: 'Abs', nameEs: 'Abdomen', icon: 'airplane' as const },
+  ];
+
+  const exploreTrains = [
+    {
+      id: '1',
+      name: 'Push Day',
+      exercises: '12',
+      duration: '25 min',
+      image: require('../../assets/images/workout_plains/mancuernas.webp')
+    },
+    {
+      id: '2',
+      name: 'Leg Day',
+      exercises: '14',
+      duration: '30 min',
+      image: require('../../assets/images/workout_plains/mancuernas.webp')
+    },
+    {
+      id: '3',
+      name: 'Leg Day',
+      exercises: '14',
+      duration: '30 min',
+      image: require('../../assets/images/workout_plains/mancuernas.webp')
+    },
+  ];
+
+  const searchData = () => {
+    setisSeaching(true)
+    const data = searchExercises(search)
+    setExercises(data)
+
+  }
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
+    <>
+      <ThemedView style={styles.exploreTrains}>
+        <ThemedText style={styles.exploreTrains_subtitle} type='subtitle'>Explorar Ejercicios</ThemedText>
+
+        {/* Buscar */}
+        <View>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeSearch}
+            onSubmitEditing={searchData}
+            value={search}
+            placeholder="Search..."
+            keyboardType="default"
+          />
+        </View>
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+
+      {
+        isSearching ? (
+          <ThemedView style={styles.exploreTrains}>
+            {/* Vista busqueda */}
+            <ThemedText>Vista busqueda</ThemedText>
+            <FlatList
+              data={exercises}
+              keyExtractor={(item) => item.id}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => {
+                console.log('render:', item.name);
+
+                return (
+                  <ExerciseCard
+                    exercise={item}
+                  />
+                );
+              }}
+
+            />
+          </ThemedView >
+        ) : (
+          <>
+            <ThemedView style={styles.exploreTrains}>
+              {/* Vista principal */}
+              <View>
+                {/* Por músculo */}
+                <ThemedText type='subtitle' style={{
+                  paddingLeft: 10,
+                }}>Por grupo muscular</ThemedText>
+                <View style={styles.muscleGrid}>
+                  {muscles.slice(0, 4).map((muscle) => (
+                    <View key={muscle.id} style={styles.muscleIcon}>
+                      <Ionicons name={muscle.icon} size={24} color="black" />
+                      <ThemedText style={styles.workoutText}>{muscle.nameEn}</ThemedText>
+                    </View>
+                  ))}
+                </View>
+              </View>
+              <HomeFastTrain data={popularTrains} subtitle='Recomendados para ti' />
+
+              {/* Explorar entrenamientos */}
+              <View style={{
+                marginTop: 10,
+                padding: 10,
+              }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 }}>
+                  <ThemedText type="subtitle">Explorar entrenamientos</ThemedText>
+                  <ThemedText type='smallLink'>Ver Todos   -{'>'} </ThemedText>
+                </View>
+                <View style={styles.exploreExersiceContainer}>
+                  <ItemList data={exploreTrains} />
+                </View>
+
+              </View>
+            </ThemedView>
+          </>
+        )
+      }
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  exploreTrains_subtitle: {
+    paddingLeft: 10,
   },
-  titleContainer: {
+  input: {
+    height: 44,
+    margin: 12,
+    borderWidth: 1,
+    borderColor: '#1b1b1b27',
+    borderRadius: 10,
+    padding: 10,
+  },
+  muscleGrid: {
     flexDirection: 'row',
-    gap: 8,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 10,
+    marginTop: 20,
   },
+  muscleIcon: {
+    width: '40%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 12,
+    borderRadius: 6,
+    backgroundColor: '#ebe8e828',
+    backdropFilter: '',
+    borderWidth: .5,
+    borderColor: '#413f3f',
+  },
+  exploreExersiceContainer: {
+    width: '100%',
+    paddingHorizontal: 10,
+    height: 160,
+  },
+  workoutText: {
+    marginLeft: 10, // Separa el texto del icono
+    fontSize: 16,
+  },
+  fastTrainInfo: {
+    color: 'white',
+    marginTop: 4,
+  },
+
 });

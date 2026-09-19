@@ -38,11 +38,22 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "expo-font",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f5476114-b22e-42cb-8b8a-20d5ec7ebd49"
+      }
+    },
+    "owner": "barbosadev"
   }
 }
