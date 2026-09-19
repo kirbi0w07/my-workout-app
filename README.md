@@ -127,7 +127,7 @@ app/
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kirbi0w07/my-workout-app.git
 ```
 
 Install dependencies:
@@ -150,7 +150,7 @@ This application uses a dedicated Laravel backend:
 
 **Workout API**
 
-> Repository: `<api-repository-url>`
+> Repository: `https://github.com/kirbi0w07/my-workout-api.git`
 
 The API must be running and accessible from the mobile development environment.
 
