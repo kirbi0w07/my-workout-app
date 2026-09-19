@@ -1,50 +1,192 @@
-# Welcome to your Expo app 👋
+# 🏋️ Workout App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile workout management application built with **React Native and Expo**, designed to help users organize workout plans, exercises, and training sessions from a mobile device.
 
-## Get started
+> 🚧 **Project status: In Development**
+>
+> This project is being developed as part of my software development portfolio, with a focus on mobile application development, REST API integration, authentication, and clean application architecture.
 
-1. Install dependencies
+## 📱 About the Project
 
-   ```bash
-   npm install
-   ```
+Workout App is a mobile application that allows users to manage their training routines and keep track of their workouts.
 
-2. Start the app
+The application communicates with a dedicated **Laravel REST API** for authentication, workout plans, exercises, and training data.
 
-   ```bash
-   npx expo start
-   ```
+The project is being developed with a **mobile-first approach**, focusing on a clean and maintainable architecture.
 
-In the output, you'll find options to open the app in a
+## ✨ Planned Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+* 🔐 User authentication
+* 👤 User profile
+* 🏋️ Exercise catalog
+* 📋 Workout plan management
+* 🔢 Sets, repetitions, and rest periods
+* 📅 Workout sessions
+* 📊 Training progress
+* 💾 Persistent authentication
+* 🌐 REST API integration
+* 🔄 API error handling
+* 📱 Responsive mobile interface
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Additional features will be added as development continues.
 
-## Get a fresh project
+## 🛠️ Tech Stack
 
-When you're ready, run:
+### Mobile
 
-```bash
-npm run reset-project
+* **React Native**
+* **Expo**
+* **Expo Router**
+* **TypeScript**
+* **Zustand**
+* **Axios**
+* **React Native Safe Area Context**
+* **React Navigation**
+
+### Backend
+
+The mobile application consumes a separate Laravel REST API.
+
+* **Laravel**
+* **PHP**
+* **Laravel Passport**
+* **PostgreSQL**
+* **REST API**
+
+## 🏗️ Architecture
+
+The application follows a service-oriented structure to keep API communication separate from the UI and application state.
+
+```text
+React Native / Expo
+        │
+        ├── Screens
+        ├── Components
+        ├── Zustand Stores
+        └── Services
+              │
+              ▼
+            Axios
+              │
+              ▼
+       Laravel REST API
+              │
+              ▼
+          PostgreSQL
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🔐 Authentication
 
-## Learn more
+Authentication is handled through the Laravel API.
 
-To learn more about developing your project with Expo, look at the following resources:
+After a successful login, the API returns an authentication token that is used to access protected resources.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The mobile application uses Axios as the HTTP client and is structured to centralize authenticated API requests.
 
-## Join the community
+## 📂 Project Structure
 
-Join our community of developers creating universal apps.
+```text
+app/
+├── (auth)/
+│   ├── login.tsx
+│   └── ...
+│
+├── (tabs)/
+│   ├── index.tsx
+│   ├── workouts.tsx
+│   └── ...
+│
+├── services/
+│   ├── api.ts
+│   ├── authService.ts
+│   ├── workoutService.ts
+│   └── ...
+│
+├── stores/
+│   ├── authStore.ts
+│   └── ...
+│
+└── components/
+    └── ...
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+> The structure may change as the project evolves.
+
+## 🚀 Getting Started
+
+### Requirements
+
+* Node.js
+* npm
+* Expo CLI / Expo Go
+* Android Studio or a physical mobile device
+* Running instance of the Workout API
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the Expo development server:
+
+```bash
+npx expo start
+```
+
+Run the application using Expo Go, Android Emulator, or another supported Expo environment.
+
+## 🔗 Backend API
+
+This application uses a dedicated Laravel backend:
+
+**Workout API**
+
+> Repository: `<api-repository-url>`
+
+The API must be running and accessible from the mobile development environment.
+
+## 🗺️ Development Roadmap
+
+* [x] Expo project setup
+* [x] Expo Router configuration
+* [x] Authentication screens
+* [x] Axios API client
+* [x] Login API integration
+* [ ] Persistent authentication
+* [ ] Automatic authentication headers
+* [ ] Exercise catalog
+* [ ] Workout plans
+* [ ] Workout sessions
+* [ ] Progress tracking
+* [ ] UI/UX refinement
+* [ ] Production deployment
+
+## 🎯 Portfolio Goals
+
+This project is being developed to demonstrate practical experience with:
+
+* React Native mobile development
+* Expo and Expo Router
+* TypeScript
+* REST API integration
+* Authentication
+* State management
+* Service-based architecture
+* Laravel API consumption
+* PostgreSQL-backed applications
+* Mobile application architecture
+
+## 📌 Project Status
+
+**In Development 🚧**
+
+The application is actively being developed and features may change as new functionality is implemented.
